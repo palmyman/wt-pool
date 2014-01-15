@@ -1,0 +1,15 @@
+{% extends 'WTPoolBundle::layout.html.twig' %}
+
+{% block body -%}
+    <h1>Pool creation</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('pool') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
