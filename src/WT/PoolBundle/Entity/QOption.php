@@ -28,6 +28,11 @@ class QOption
      */
     private $text;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="qOptions")
+     */
+    protected $question;
+
 
     /**
      * Get id

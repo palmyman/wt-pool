@@ -40,6 +40,16 @@ class Question
      */
     protected $pool;
 
+    /**
+     * @ORM\OneToMany(targetEntity="QOption", mappedBy="question")
+     */
+    protected $qOptions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Answer", mappedBy="question")
+     */
+    protected $answers;
+
 
     /**
      * Get id

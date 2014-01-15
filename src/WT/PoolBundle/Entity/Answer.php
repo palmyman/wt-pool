@@ -42,6 +42,11 @@ class Answer
      */
     private $qOptionId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Question", inversedBy="answers")
+     */
+    protected $question;
+
 
     /**
      * Get id
