@@ -1,0 +1,5 @@
+wt_pool:
+    resource: "@WTPoolBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
