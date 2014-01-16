@@ -223,12 +223,19 @@ class QuestionController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Question entity.');
             }
-
+            $qOptions = $entity->getQOptions();
+            foreach ($qOptions as $qOption) {
+                $em->remove($qOption);
+            }
+            $answers = $entity->getAnswers();
+            foreach ($answers as $answer) {
+                $em->remove($answer);
+            }            
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('question'));
+        return $this->redirect($this->generateUrl('question_new', array('poolId' => $entity->getPool()->getId())));
     }
 
     /**

@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'WTPoolBundle::layout.html.twig' %}
 
 {% block body -%}
     <h1>QOption edit</h1>
@@ -7,8 +7,8 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('qoption') }}">
-            Back to the list
+        <a href="{{ path('qoption_new', { 'questionId': entity.question.id}) }}">
+            Back to the question options
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

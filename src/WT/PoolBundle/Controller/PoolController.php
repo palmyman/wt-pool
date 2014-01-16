@@ -220,6 +220,18 @@ class PoolController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Pool entity.');
             }
+            $questions = $entity->getQuestions();
+            foreach ($questions as $question) {
+                $qOptions = $question->getQOptions();
+                foreach ($qOptions as $qOption) {
+                    $em->remove($qOption);
+                }
+                $answers = $question->getAnswers();
+                foreach ($answers as $answer) {
+                    $em->remove($answer);
+                }
+                $em->remove($question);
+            }
 
             $em->remove($entity);
             $em->flush();
