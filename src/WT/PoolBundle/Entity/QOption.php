@@ -29,6 +29,13 @@ class QOption
     private $text;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="answered", type="integer")
+     */
+    private $answered;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="qOptions")
      */
     protected $question;
@@ -88,5 +95,40 @@ class QOption
     public function getQuestion()
     {
         return $this->question;
+    }
+
+    /**
+     * Set answered
+     *
+     * @param integer $answered
+     * @return QOption
+     */
+    public function setAnswered($answered)
+    {
+        $this->answered = $answered;
+
+        return $this;
+    }
+
+    /**
+     * Inc answered
+     *
+     * @return QOption
+     */
+    public function incAnswered()
+    {
+        $this->answered++;
+
+        return $this;
+    }
+
+    /**
+     * Get answered
+     *
+     * @return integer 
+     */
+    public function getAnswered()
+    {
+        return $this->answered;
     }
 }

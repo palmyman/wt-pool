@@ -19,16 +19,10 @@
                 <td>{{ entity.title }}</td>
                 <td>{{ entity.desciprion }}</td>
                 <td>
-                <ul>
+                <ul>                    
                     <li>
-                        <a href="{{ path('question_new', { 'poolId': entity.id }) }}">add question</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('pool_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('pool_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
+                        <a href="{{ path('pool_show', { 'id': entity.id }) }}">Manage</a>
+                    </li>                    
                 </ul>
                 </td>
             </tr>

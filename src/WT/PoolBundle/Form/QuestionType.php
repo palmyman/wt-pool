@@ -20,7 +20,7 @@ class QuestionType extends AbstractType
         $builder
             ->add('text')            
             ->add('type', 'choice', array(
-                'choices'   => array('0' => 'Text', '1' => 'Check', '2' => 'Options'),
+                'choices'   => array('0' => 'Check', '1' => 'Text', '2' => 'Options'),
                 'expanded'  => true,))
             ->add('pool', 'entity', array(
                 'class' => 'WTPoolBundle:Pool',

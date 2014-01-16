@@ -19,28 +19,14 @@ class Answer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="checked", type="boolean")
-     */
-    private $checked;
+    private $id;    
 
     /**
      * @var string
      *
      * @ORM\Column(name="text", type="string", length=255)
      */
-    private $text;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="qOptionId", type="integer")
-     */
-    private $qOptionId;
+    private $text;    
 
     /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="answers")
@@ -102,29 +88,6 @@ class Answer
     public function getText()
     {
         return $this->text;
-    }
-
-    /**
-     * Set qOptionId
-     *
-     * @param integer $qOptionId
-     * @return Answer
-     */
-    public function setQOptionId($qOptionId)
-    {
-        $this->qOptionId = $qOptionId;
-
-        return $this;
-    }
-
-    /**
-     * Get qOptionId
-     *
-     * @return integer 
-     */
-    public function getQOptionId()
-    {
-        return $this->qOptionId;
     }
 
     /**

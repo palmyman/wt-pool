@@ -29,6 +29,13 @@ class QOption
     private $text;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="answered", type="integer")
+     */
+    private $answered;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Question", inversedBy="qOptions")
      */
     protected $question;

@@ -36,6 +36,20 @@ class Question
     private $type;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="true", type="integer")
+     */
+    private $true;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="false", type="integer")
+     */
+    private $false;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Pool", inversedBy="questions")
      */
     protected $pool;
@@ -114,7 +128,7 @@ class Question
      */
     public function setPool(\WT\PoolBundle\Entity\Pool $pool = null)
     {
-        $this->pool = $pool;
+        $this->pool = $pool;        
 
         return $this;
     }
@@ -201,5 +215,75 @@ class Question
     public function getAnswers()
     {
         return $this->answers;
+    }
+
+    /**
+     * Set true
+     *
+     * @param integer $true
+     * @return Question
+     */
+    public function setTrue($true)
+    {
+        $this->true = $true;
+
+        return $this;
+    }
+
+    /**
+     * Inc true
+     *
+     * @return Question
+     */
+    public function incTrue()
+    {
+        $this->true++;
+
+        return $this;
+    }
+
+    /**
+     * Get true
+     *
+     * @return integer 
+     */
+    public function getTrue()
+    {
+        return $this->true;
+    }
+
+    /**
+     * Set false
+     *
+     * @param integer $false
+     * @return Question
+     */
+    public function setFalse($false)
+    {
+        $this->false = $false;
+
+        return $this;
+    }
+
+    /**
+     * Inc false
+     *
+     * @return Question
+     */
+    public function incFalse()
+    {
+        $this->false++;
+
+        return $this;
+    }
+
+    /**
+     * Get false
+     *
+     * @return integer 
+     */
+    public function getFalse()
+    {
+        return $this->false;
     }
 }

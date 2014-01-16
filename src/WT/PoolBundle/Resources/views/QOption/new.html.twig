@@ -1,15 +1,24 @@
 {% extends 'WTPoolBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>QOption creation</h1>
+    <h1>Option management</h1>
 
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
+            <a href="{{ path('question_new', { 'poolId': entity.question.pool.id }) }}">Back to question management</a>
+        </li>    
+    <li>
         <a href="{{ path('pool_show', { 'id': entity.question.pool.id}) }}">
             Back to the pool detail
         </a>
     </li>
+</ul>
+<h2>Options</h2>
+<ul>
+    {% for qoption in entity.question.qoptions %}
+        <li>{{qoption.text}}</li>
+    {% endfor %}
 </ul>
 {% endblock %}

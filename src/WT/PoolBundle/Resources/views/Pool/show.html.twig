@@ -4,11 +4,7 @@
     <h1>Pool</h1>
 
     <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
+        <tbody>            
             <tr>
                 <th>Title</th>
                 <td>{{ entity.title }}</td>
@@ -22,7 +18,7 @@
 
     <ul class="record_actions">
         <li>
-            <a href="{{ path('question_new', { 'poolId': entity.id }) }}">Add questions</a>
+            <a href="{{ path('question_new', { 'poolId': entity.id }) }}">Add/Edit/Remove questions</a>
         </li>
         <li>
             <a href="{{ path('pool') }}">
@@ -31,7 +27,7 @@
         </li>
         <li>
             <a href="{{ path('pool_edit', { 'id': entity.id }) }}">
-                Edit
+                Edit pool title and description
             </a>
         </li>
         <li>{{ form(delete_form) }}</li>
@@ -42,32 +38,31 @@
     <table class="records_list">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Text</th>
                 <th>Type</th>
-                <th>Actions</th>
+                <th>Answers</th>
             </tr>
         </thead>
         <tbody>
         {% for question in entity.questions %}
-            <tr>
-                <td><a href="{{ path('question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
+            <tr>                
                 <td>{{ question.text }}</td>
-                <td>{{ question.type }}</td>
-                <td>
-                <ul>
+                <td>                    
                     {% if question.type == 2 %}
-                        <li>
-                            <a href="{{ path('qoption_new', { 'questionId': question.id }) }}">add option</a>
-                        </li>
+                        Select
+                        <ul>
+                            {% for qoption in question.qoptions %}
+                                <li>{{qoption.text}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% elseif question.type == 1 %}
+                        Text
+                    {% else %}
+                        Boolean
                     {% endif%}
-                    <li>
-                        <a href="{{ path('question_show', { 'id': question.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('question_edit', { 'id': question.id }) }}">edit</a>
-                    </li>
-                </ul>
+                </td>
+                <td>
+                
                 </td>
             </tr>
         {% endfor %}
