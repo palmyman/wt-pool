@@ -50,6 +50,10 @@ class Question
      */
     protected $answers;
 
+    /**
+     * @var integer
+     * 
+     */
 
     /**
      * Get id
@@ -128,5 +132,79 @@ class Question
     public function getPool()
     {
         return $this->pool;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->qOptions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add qOptions
+     *
+     * @param \WT\PoolBundle\Entity\QOption $qOptions
+     * @return Question
+     */
+    public function addQOption(\WT\PoolBundle\Entity\QOption $qOptions)
+    {
+        $this->qOptions[] = $qOptions;
+
+        return $this;
+    }
+
+    /**
+     * Remove qOptions
+     *
+     * @param \WT\PoolBundle\Entity\QOption $qOptions
+     */
+    public function removeQOption(\WT\PoolBundle\Entity\QOption $qOptions)
+    {
+        $this->qOptions->removeElement($qOptions);
+    }
+
+    /**
+     * Get qOptions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQOptions()
+    {
+        return $this->qOptions;
+    }
+
+    /**
+     * Add answers
+     *
+     * @param \WT\PoolBundle\Entity\Answer $answers
+     * @return Question
+     */
+    public function addAnswer(\WT\PoolBundle\Entity\Answer $answers)
+    {
+        $this->answers[] = $answers;
+
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \WT\PoolBundle\Entity\Answer $answers
+     */
+    public function removeAnswer(\WT\PoolBundle\Entity\Answer $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
     }
 }

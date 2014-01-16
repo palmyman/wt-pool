@@ -1,7 +1,7 @@
 {% extends 'WTPoolBundle::layout.html.twig' %}
 
 {% block body -%}
-    <h1>Pool list</h1>
+    <h1>{% block title %}Pool list{% endblock title %}</h1>
 
     <table class="records_list">
         <thead>
@@ -20,6 +20,9 @@
                 <td>{{ entity.desciprion }}</td>
                 <td>
                 <ul>
+                    <li>
+                        <a href="{{ path('question_new', { 'poolId': entity.id }) }}">add question</a>
+                    </li>
                     <li>
                         <a href="{{ path('pool_show', { 'id': entity.id }) }}">show</a>
                     </li>

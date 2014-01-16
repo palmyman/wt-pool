@@ -96,4 +96,44 @@ class Pool
     {
         return $this->desciprion;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->questions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add questions
+     *
+     * @param \WT\PoolBundle\Entity\Question $questions
+     * @return Pool
+     */
+    public function addQuestion(\WT\PoolBundle\Entity\Question $questions)
+    {
+        $this->questions[] = $questions;
+
+        return $this;
+    }
+
+    /**
+     * Remove questions
+     *
+     * @param \WT\PoolBundle\Entity\Question $questions
+     */
+    public function removeQuestion(\WT\PoolBundle\Entity\Question $questions)
+    {
+        $this->questions->removeElement($questions);
+    }
+
+    /**
+     * Get questions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getQuestions()
+    {
+        return $this->questions;
+    }
 }

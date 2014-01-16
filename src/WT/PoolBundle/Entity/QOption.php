@@ -66,4 +66,27 @@ class QOption
     {
         return $this->text;
     }
+
+    /**
+     * Set question
+     *
+     * @param \WT\PoolBundle\Entity\Question $question
+     * @return QOption
+     */
+    public function setQuestion(\WT\PoolBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \WT\PoolBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
 }

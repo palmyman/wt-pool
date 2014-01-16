@@ -20,17 +20,52 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('pool') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('pool_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('question_new', { 'poolId': entity.id }) }}">add question</a>
+        </li>
+        <li>
+            <a href="{{ path('pool') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('pool_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
+
+    <h2>Question list</h2>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Text</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for question in entity.questions %}
+            <tr>
+                <td><a href="{{ path('question_show', { 'id': question.id }) }}">{{ question.id }}</a></td>
+                <td>{{ question.text }}</td>
+                <td>{{ question.type }}</td>
+                <td>
+                <ul>                    
+                    <li>
+                        <a href="{{ path('question_show', { 'id': question.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('question_edit', { 'id': question.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

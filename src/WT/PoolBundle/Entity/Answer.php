@@ -126,4 +126,27 @@ class Answer
     {
         return $this->qOptionId;
     }
+
+    /**
+     * Set question
+     *
+     * @param \WT\PoolBundle\Entity\Question $question
+     * @return Answer
+     */
+    public function setQuestion(\WT\PoolBundle\Entity\Question $question = null)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return \WT\PoolBundle\Entity\Question 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
 }

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Pool bundle - {% block title %}Úvod{% endblock title %}</title>    
+    <title>Pool bundle - {% block title %}Description{% endblock title %}</title>    
     <link href="{{ asset('bundles/wtpool/css/default.css') }}" rel="stylesheet" type="text/css" title="Default style" media="all">
     <link href="{{ asset('bundles/wtpool/css/print.css') }}" rel="stylesheet" type="text/css" media="print"> 
     <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
@@ -12,10 +12,11 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container-narrow">
-          <a class="brand" href="index.html">Pool bundle</a>
+          <a class="brand" href="{{ path('home') }}">Pool bundle</a>
           <ul class="nav">
             {% block menu %}            
-              <li  class="active" ><a href="{{ path('home') }}">Úvod</a></li>
+              <li class="active"><a href="{{ path('home') }}">Desctiption</a></li>
+              <li><a href="{{ path('pool') }}">Pools list</a></li>
             {% endblock menu %}
           </ul>
         </div>
