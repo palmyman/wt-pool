@@ -206,7 +206,7 @@ img {
   background-image: url("gh.png");
 }
 
-select#wt_poolbundle_question_pool {
+select#wt_poolbundle_question_pool, select#wt_poolbundle_qoption_question {
     display: none;
 }
 

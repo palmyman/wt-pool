@@ -22,11 +22,11 @@
 
     <ul class="record_actions">
         <li>
-            <a href="{{ path('question_new', { 'poolId': entity.id }) }}">add question</a>
+            <a href="{{ path('question_new', { 'poolId': entity.id }) }}">Add questions</a>
         </li>
         <li>
             <a href="{{ path('pool') }}">
-                Back to the list
+                Back to the list of Pools
             </a>
         </li>
         <li>
@@ -55,7 +55,12 @@
                 <td>{{ question.text }}</td>
                 <td>{{ question.type }}</td>
                 <td>
-                <ul>                    
+                <ul>
+                    {% if question.type == 2 %}
+                        <li>
+                            <a href="{{ path('qoption_new', { 'questionId': question.id }) }}">add option</a>
+                        </li>
+                    {% endif%}
                     <li>
                         <a href="{{ path('question_show', { 'id': question.id }) }}">show</a>
                     </li>

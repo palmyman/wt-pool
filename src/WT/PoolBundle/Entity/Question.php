@@ -48,12 +48,7 @@ class Question
     /**
      * @ORM\OneToMany(targetEntity="Answer", mappedBy="question")
      */
-    protected $answers;
-
-    /**
-     * @var integer
-     * 
-     */
+    protected $answers;    
 
     /**
      * Get id

@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'WTPoolBundle::layout.html.twig' %}
 
 {% block body -%}
     <h1>QOption creation</h1>
@@ -7,8 +7,8 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('qoption') }}">
-            Back to the list
+        <a href="{{ path('pool_show', { 'id': entity.question.pool.id}) }}">
+            Back to the pool detail
         </a>
     </li>
 </ul>

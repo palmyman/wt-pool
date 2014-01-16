@@ -53,7 +53,7 @@ class QOptionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('qoption_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('qoption_new', array('questionId' => $entity->getQuestion()->getId())));
         }
 
         return array(
@@ -76,7 +76,7 @@ class QOptionController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Add'));
 
         return $form;
     }
@@ -84,13 +84,16 @@ class QOptionController extends Controller
     /**
      * Displays a form to create a new QOption entity.
      *
-     * @Route("/new", name="qoption_new")
+     * @Route("/{questionId}/new", name="qoption_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($questionId)
     {
+        $em = $this->getDoctrine()->getManager();
+        $question = $this->get('doctrine')->getRepository('WTPoolBundle:Question')->find($questionId);
         $entity = new QOption();
+        $entity->setQuestion($question);
         $form   = $this->createCreateForm($entity);
 
         return array(

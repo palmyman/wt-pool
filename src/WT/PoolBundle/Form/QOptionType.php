@@ -16,8 +16,12 @@ class QOptionType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('question')
-        ;
+            ->add('question', 'entity', array(
+                'class' => 'WTPoolBundle:Question',
+                'property' => 'text',
+                'read_only' => true,
+                'label' => ' ',
+        ));
     }
     
     /**

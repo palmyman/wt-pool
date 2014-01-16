@@ -53,7 +53,7 @@ class QuestionController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('question_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('question_new', array('poolId' => $entity->getPool()->getId())));
         }
 
         return array(
@@ -76,7 +76,7 @@ class QuestionController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Add'));
 
         return $form;
     }
