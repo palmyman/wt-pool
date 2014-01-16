@@ -16,12 +16,7 @@ class PoolType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('pool', 'entity', array(
-                'class' => 'WTPoolBundle:Pool',
-                'property' => 'title',
-                'read_only' => true,
-                'label' => ' ',            
-            ))
+            ->add('desciprion')
         ;
     }
     
