@@ -40,6 +40,14 @@ class QOption
      */
     protected $question;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answered = 0;
+    }
+
 
     /**
      * Get id

@@ -38,16 +38,16 @@ class Question
     /**
      * @var integer
      *
-     * @ORM\Column(name="true", type="integer")
+     * @ORM\Column(name="trueAnswered", type="integer")
      */
-    private $true;
+    private $trueAnswered;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="false", type="integer")
+     * @ORM\Column(name="falseAnswered", type="integer")
      */
-    private $false;
+    private $falseAnswered;
 
     /**
      * @ORM\ManyToOne(targetEntity="Pool", inversedBy="questions")
@@ -142,6 +142,7 @@ class Question
     {
         return $this->pool;
     }
+
     /**
      * Constructor
      */
@@ -149,6 +150,9 @@ class Question
     {
         $this->qOptions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->type = 0;
+        $this->trueAnswered = 0;
+        $this->falseAnswered = 0;
     }
 
     /**
@@ -218,72 +222,72 @@ class Question
     }
 
     /**
-     * Set true
+     * Set trueAnswered
      *
-     * @param integer $true
+     * @param integer $trueAnswered
      * @return Question
      */
-    public function setTrue($true)
+    public function setTrueAnswered($trueAnswered)
     {
-        $this->true = $true;
+        $this->trueAnswered = $trueAnswered;
 
         return $this;
     }
 
     /**
-     * Inc true
+     * Inc trueAnswered
      *
      * @return Question
      */
-    public function incTrue()
+    public function incTrueAnswered()
     {
-        $this->true++;
+        $this->trueAnswered++;
 
         return $this;
     }
 
     /**
-     * Get true
+     * Get trueAnswered
      *
      * @return integer 
      */
-    public function getTrue()
+    public function getTrueAnswered()
     {
-        return $this->true;
+        return $this->trueAnswered;
     }
 
     /**
-     * Set false
+     * Set falseAnswered
      *
-     * @param integer $false
+     * @param integer $falseAnswered
      * @return Question
      */
-    public function setFalse($false)
+    public function setFalseAnswered($falseAnswered)
     {
-        $this->false = $false;
+        $this->falseAnswered = $falseAnswered;
 
         return $this;
     }
 
     /**
-     * Inc false
+     * Inc falseAnswered
      *
      * @return Question
      */
-    public function incFalse()
+    public function incFalseAnswered()
     {
-        $this->false++;
+        $this->falseAnswered++;
 
         return $this;
     }
 
     /**
-     * Get false
+     * Get falseAnswered
      *
      * @return integer 
      */
-    public function getFalse()
+    public function getFalseAnswered()
     {
-        return $this->false;
+        return $this->falseAnswered;
     }
 }

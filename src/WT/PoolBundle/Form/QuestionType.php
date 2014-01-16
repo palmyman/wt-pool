@@ -16,17 +16,20 @@ class QuestionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $disabled = false;        
+        //if($options['data']) $disabled = true;       
         $request = Request::createFromGlobals();
         $builder
             ->add('text')            
             ->add('type', 'choice', array(
                 'choices'   => array('0' => 'Check', '1' => 'Text', '2' => 'Options'),
-                'expanded'  => true,))
+                'expanded'  => true,                
+                'disabled' => $disabled,))
             ->add('pool', 'entity', array(
                 'class' => 'WTPoolBundle:Pool',
                 'property' => 'title',
                 'read_only' => true,
-                'label' => ' ',            
+                'label' => ' ',                
             ))            
         ;
     }
