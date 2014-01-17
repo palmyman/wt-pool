@@ -48,6 +48,10 @@ class QOption
         $this->answered = 0;
     }
 
+    public function __toString() {
+        return $this->text;
+    }
+
 
     /**
      * Get id

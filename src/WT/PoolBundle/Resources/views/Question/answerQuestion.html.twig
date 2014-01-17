@@ -1,0 +1,13 @@
+{% extends 'WTPoolBundle::layout.html.twig' %}
+{% block body -%}
+    <h1>Answering the question</h1>
+
+    <form action="#" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Save</button>
+    </p>
+	</form>
+        
+</ul>
+{% endblock %}

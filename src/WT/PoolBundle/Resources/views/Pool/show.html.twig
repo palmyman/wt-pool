@@ -40,6 +40,7 @@
             <tr>
                 <th>Text</th>
                 <th>Type</th>
+                <th>Actions</th>
                 <th>Answers</th>
             </tr>
         </thead>
@@ -49,12 +50,7 @@
                 <td>{{ question.text }}</td>
                 <td>                    
                     {% if question.type == 2 %}
-                        Select
-                        <ul>
-                            {% for qoption in question.qoptions %}
-                                <li>{{qoption.text}}</li>
-                            {% endfor %}
-                        </ul>
+                        Select                        
                     {% elseif question.type == 1 %}
                         Text
                     {% else %}
@@ -62,7 +58,30 @@
                     {% endif%}
                 </td>
                 <td>
-                
+                    <a href="{{ path('question_answer', { 'id': question.id }) }}">
+                        Answer
+                    </a>
+                </td>
+                <td>
+                    {% if question.type == 2 %}
+                        Select
+                        <ul>
+                            {% for qoption in question.qoptions %}
+                                <li>{{qoption.text}} : {{qoption.answered}}x</li>
+                            {% endfor %}
+                        </ul>
+                    {% elseif question.type == 1 %}
+                        <ul>
+                            {% for answer in question.answers %}
+                                <li>{{answer.text}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <ul>
+                            <li>True: {{question.trueanswered}}</li>
+                            <li>False: {{question.falseanswered}}</li>
+                        </ul>
+                    {% endif%}
                 </td>
             </tr>
         {% endfor %}

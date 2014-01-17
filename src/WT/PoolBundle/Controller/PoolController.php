@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WT\PoolBundle\Entity\Pool;
+use WT\PoolBundle\Entity\Answer;
 use WT\PoolBundle\Form\PoolType;
 
 /**
@@ -238,7 +239,7 @@ class PoolController extends Controller
         }
 
         return $this->redirect($this->generateUrl('pool'));
-    }
+    }    
 
     /**
      * Creates a form to delete a Pool entity by id.
@@ -255,5 +256,67 @@ class PoolController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /**
+     * Create form, fill the pool and persist answers TODO
+     *
+     * @Route("/{id}/fill", name="pool_fill")
+     * @Template()     
+     */
+    public function fillPoolAction(Request $request, $id) {
+        $form = $this->createFillForm($id);
+        $form->handleRequest($request);       
+
+        if($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('WTPoolBundle:Pool')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Pool entity.');
+            }
+            $em = $this->get('doctrine')->getManager();
+            //$em->persist($question); persist data
+            $em->flush();
+        }
+
+        return array(
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * Creates a form to fill a Pool entity by id. TODO
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createFillForm($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $pool = $em->getRepository('WTPoolBundle:Pool')->find($id);
+        $questions = $pool->getQuestions();
+
+        $formBuilderQuestionnaire = $this->createFormBuilder();
+        $i = 0;
+
+        foreach ($questions as $question) {
+            $formBuilder = $this->get('form.factory')->createNamedBuilder($i, 'form');
+            $formBuilder->add('text' , 'textarea',  array(
+                'required' => false,
+                'label' => $question->getText() 
+            ));
+
+            $formBuilderQuestionnaire->add($formBuilder);
+
+            $i++;
+            // if($question->getType() == 0) $form->add('boolean', 'checkbox', array('required' => false, 'label' => $question->getText()));
+            // elseif($question->getType() == 1) $form->add('textAnswer', array('label' => $question->getText()));
+            // else $form->add('selectBox', array('label' => $question->getText()));
+        }
+        $formBuilderQuestionnaire->add('submit', 'submit', array('label' => 'Save'));
+        $form = $formBuilderQuestionnaire->getForm();
+        return $form;
     }
 }

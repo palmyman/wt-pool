@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use WT\PoolBundle\Entity\Question;
+use WT\PoolBundle\Entity\Answer;
 use WT\PoolBundle\Form\QuestionType;
 
 /**
@@ -253,5 +254,71 @@ class QuestionController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    /**
+     * Create form, answer the question and persist data
+     *
+     * @Route("/{id}/answer", name="question_answer")
+     * 
+     * @Template()     
+     */
+    public function answerQuestionAction($id) {
+        $form = $this->createAnswerForm($id);               
+
+        if(isset($_POST['form'])) {            
+            $em = $this->getDoctrine()->getManager();
+            $question = $em->getRepository('WTPoolBundle:Question')->find($id);
+
+            if (!$question) {
+                throw $this->createNotFoundException('Unable to find Pool question.');
+            }
+
+            if($question->getType() == 0) {
+                if(isset($_POST['form']['boolean'])) $question->incTrueAnswered();
+                else $question->incFalseAnswered();                
+            } elseif($question->getType() == 1) {
+                $answer = new Answer();
+                $answer->setQuestion($question);
+                $answer->setText($_POST['form']['textAnswer']);
+                $em->persist($answer);
+            } else {
+                $qOption = $em->getRepository('WTPoolBundle:QOption')->find($_POST['form']['select']);
+                $qOption->incAnswered();
+            }            
+            $em->flush();
+            return $this->redirect($this->generateUrl('pool_show', array('id' => $question->getPool()->getId())));
+        }
+
+        return array(
+            'form' => $form->createView(),
+        );
+    }
+
+    /**
+     * Creates a form to answer a Question entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createAnswerForm($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $question = $em->getRepository('WTPoolBundle:Question')->find($id);
+        if($question->getType() == 0)
+            $form = $this->createFormBuilder()
+                ->add('boolean', 'checkbox', array('required' => false, 'label' => $question->getText()));
+        elseif($question->getType() == 1)
+            $form = $this->createFormBuilder()
+                ->add('textAnswer', 'text', array('label' => $question->getText()));
+        else
+            $form = $this->createFormBuilder()
+                ->add('select', 'entity', array(
+                'class' => 'WTPoolBundle:QOption',
+                'choices' => $question->getQOptions(),
+                'label' => $question->getText(),                
+                ));
+        
+        return $form->getForm();
     }
 }
